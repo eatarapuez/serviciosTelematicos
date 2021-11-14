@@ -37,5 +37,6 @@ app.post('/', (req,res)=>{
     age.push(req.body.age);
     tel.push(req.body.tel);
     sex.push(req.body.sex);
+    res.sendFile(path.join(__dirname, '/formulario.html'));
     });
 app.listen(puerto, () => {console.log("Ejecutando express");});
