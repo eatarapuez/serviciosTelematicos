@@ -40,3 +40,14 @@ app.post('/', (req,res)=>{
     res.sendFile(path.join(__dirname, '/formulario.html'));
     });
 app.listen(puerto, () => {console.log("Ejecutando express");});
+function doupload() {
+    texto = texto+"\n"+'<button type="button" class="collapsible">Texto'+x+'</button><div class="content"><p>Esto es un texto '+x+'</p></div>';
+        document.getElementById("fields").innerHTML = texto;
+        x = x+1;
+    let data = document.getElementById("file").files[0];
+    let entry = document.getElementById("file").files[0];
+    console.log('doupload',entry,data)
+    fetch('uploads/' + encodeURIComponent(entry.name), {method:'PUT',body:data});
+    alert('your file has been uploaded');
+    //location.reload();
+};
