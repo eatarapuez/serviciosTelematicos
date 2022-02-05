@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <script src="scripts/Funciones.js"></script>
+    <title>Futbolito</title>
+ <body onload="iniciar_WEBCAM();">
+  <div class="video-wrap">
+    <canvas id="canvas" width="680" height="450"></canvas>
+    <video id="video" playsinline autoplay></video>
+</div>
+   
+   <br>
+   </br> 
+   <input type="button" value = "Imprimir" onclick = "javascript:window.print()">
+ </body>
+ <script>   
+    var canvas = document.getElementById("canvas");
+    var lienzo = canvas.getContext("2d");
+    var ballRadius = 10;
+    var x = canvas.width/2;
+    var y = canvas.height/2;
+    var dx = 2;
+    var dy = -2;
+    var paddleHeight = 30;
+    var paddleWidth = 30;
+    var paddleX = (canvas.width-paddleWidth)/2+80;
+    var paddleY = (canvas.height-paddleHeight)/2;
+    var paddleArgX = (canvas.width-paddleWidth)/2-80;
+    var paddleArgY =  (canvas.height-paddleHeight)/2;
+    var paddleArgWidth = 30;
+    var paddleArgHeight = 30; 
+
+    var rightPressed = false;
+    var leftPressed = false;
+    var upPressed = false;
+    var downPressed = false;
+
+    var rightArgPressed = false;
+    var leftArgPressed = false;
+    var upArgPressed = false;
+    var downArgPressed = false;
+
+    var color = "yellow"
+    var colorBall = "red"
+    var colorSite = "black"
+    var colorArg = "blue"
+    var Colombia = 0
+    var Argentina = 0
+
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    function keyDownHandler(e) {
+        if(e.keyCode == 39) {
+            rightPressed = true;
+        }
+        else if(e.keyCode == 37) {
+            leftPressed = true;
+        }else if(e.keyCode == 38) {
+            upPressed = true;
+        }
+        else if(e.keyCode == 40) {
+            downPressed = true;
+        }else if(e.keyCode == 87) {
+            upArgPressed = true;
+        }
+        else if(e.keyCode == 83) {
+            downArgPressed = true;
+        }else if(e.keyCode == 68) {
+            rightArgPressed = true;
+        }
+        else if(e.keyCode == 65) {
+            leftArgPressed = true;
+        }
+    }
+    function keyUpHandler(e) {
+        if(e.keyCode == 39) {
+            rightPressed = false;
+        }
+        else if(e.keyCode == 37) {
+            leftPressed = false;
+        }else if(e.keyCode == 38) {
+            upPressed = false;
+        }
+        else if(e.keyCode == 40) {
+            downPressed = false;
+        }else if(e.keyCode == 87) {
+            upArgPressed = false;
+        }
+        else if(e.keyCode == 83) {
+            downArgPressed = false;
+        }else if(e.keyCode == 68) {
+            rightArgPressed = false;
+        }
+        else if(e.keyCode == 65) {
+            leftArgPressed = false;
+        }
+    }
+
+    function drawBall() {
+        lienzo.beginPath();
+        lienzo.arc(x, y, ballRadius, 0, Math.PI*2);
+        lienzo.fillStyle =colorBall;
+        lienzo.fill();
+        lienzo.closePath();
+    }
+    function drawPaddleCol() {
+        lienzo.beginPath();
+        lienzo.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+        lienzo.fillStyle = color;
+        lienzo.fill();
+        lienzo.closePath();
+    }
+    function drawPaddleArg() {
+        lienzo.beginPath();
+        lienzo.rect(paddleArgX, paddleArgY, paddleArgWidth, paddleArgHeight);
+        lienzo.fillStyle = colorArg;
+        lienzo.fill();
+        lienzo.closePath();
+    }    
+    function drawSite() {
+      lienzo.beginPath();
+      lienzo.fillStyle = colorSite;
+      //rectangulo
+      lienzo.rect(0, 0, 5, canvas.height);
+      lienzo.rect(0, 0, canvas.width, 5);
+      lienzo.rect(canvas.width-5, 0, 5, canvas.height);
+      lienzo.rect(0,canvas.height-5, canvas.width, 5);
+      lienzo.rect(canvas.width/2, 0, 5, canvas.height);
+      //cancha1
+      lienzo.rect(0,canvas.height*0.33, canvas.width*0.1, 5);
+      lienzo.rect(0,canvas.height*0.66, canvas.width*0.1, 5);
+      lienzo.rect(canvas.width*0.1,canvas.height*0.33, 5, canvas.height*0.33+5);
+      //cancha 2
+      lienzo.rect(canvas.width-canvas.width*0.1,canvas.height*0.33, canvas.width, 5);
+      lienzo.rect(canvas.width-canvas.width*0.1,canvas.height*0.66, canvas.width, 5);
+      lienzo.rect(canvas.width-canvas.width*0.1,canvas.height*0.33, 5, canvas.height*0.33+5);
+      //circulo central
+      lienzo.arc(canvas.width/2, canvas.height/2, 50, 0, Math.PI*2);
+      lienzo.fill();      
+      lienzo.closePath();
+    }
+    function draw() {
+        lienzo.clearRect(0, 0, canvas.width, canvas.height);        
+        drawSite();
+        drawBall();
+        drawPaddleCol();
+        drawPaddleArg();
+        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+            dx = -dx;
+        }else if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+            dy = -dy;
+        }else if(x > paddleX && x < paddleX + paddleWidth && y > paddleY && y < paddleY + paddleHeight) {
+                dy = -dy;
+                dx = -dx;
+        }else if(x > paddleArgX && x < paddleArgX + paddleArgWidth && y > paddleArgY && y < paddleArgY + paddleArgHeight){
+                dy = -dy;
+                dx = -dx;
+        }
+        if(y+dy>canvas.height*0.33 && y+dy<canvas.height*0.66 && x+dx<15){
+          alert("Gol de Colombia");
+          x = canvas.width/2;
+          y = canvas.height/2;          
+          Colombia = Colombia + 1;
+        }
+        if(y+dy>canvas.height*0.33 && y+dy<canvas.height*0.66 && x+dx>660){
+          alert("Gol de Argentina");
+          x = canvas.width/2;
+          y = canvas.height/2;
+          Argentina = Argentina +1;
+        }      
+        if(rightPressed && paddleX < canvas.width-paddleWidth) {
+            paddleX += 7;
+        }
+        else if(leftPressed && paddleX > 0) {
+            paddleX -= 7;
+        }
+        if(downPressed && paddleY < canvas.height-paddleHeight) {
+            paddleY += 7;
+        }
+        else if(upPressed && paddleY > 0) {
+            paddleY -= 7;
+        }
+//Argentina
+        if(rightArgPressed && paddleArgX < canvas.width-paddleArgWidth) {
+            paddleArgX += 7;
+        }
+        else if(leftArgPressed && paddleArgX > 0) {
+            paddleArgX -= 7;
+        }
+        if(downArgPressed && paddleArgY < canvas.height-paddleArgHeight) {
+            paddleArgY += 7;
+        }
+        else if(upArgPressed && paddleArgY > 0) {
+            paddleArgY -= 7;
+        }
+        
+        x += dx;
+        y += dy;
+        drawScoreCol(Colombia);
+        drawScoreArg(Argentina);
+    }
+    function drawScoreCol(score) {
+        lienzo.font = "16px Arial";
+        lienzo.fillStyle = "blue";
+        lienzo.fillText("Colombia: "+score, 580, 20);
+    }
+    function drawScoreArg(score) {
+        lienzo.font = "16px Arial";
+        lienzo.fillStyle = "blue";
+        lienzo.fillText("Argentina: "+score, 8, 20);
+    }
+
+    setInterval(draw, 10);
+    
+</script>
+</html>
