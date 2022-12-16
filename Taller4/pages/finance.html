@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/style-sheet.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones Financieras</title>
+</head>
+<body>
+    <ul>
+        <li><a class="/active" href="/finance">Soluciones Financieras</a></li>
+        <li><a href="/tips">Conejos para ti</a></li>
+        <li><a href="/employ">Emprendimientos</a></li>
+        <li><a href="/user">Mi Perfil</a></li>
+    </ul>
+    <div id="borderedondoizquierda">
+        <whitetext>Tips diarios</whitetext>
+        <img src="https://cdn-icons-png.flaticon.com/512/4151/4151213.png" width="32" height="32">
+        <p>
+            <%= tips %>
+        </p>
+    </div>
+    <div id=<%= color %> >
+        <whitetext>Salud economica</whitetext>
+        <p>
+            <%= estado %>
+        </p>
+    </div>
+    <div id="borderedondoderecha">
+        <whitetext>Rebajas en productos</whitetext>
+        <p>
+            productos de canasta familiar
+        </p>
+        <table>
+            <th></th>
+            <form action="/" method="post">
+            <tr>
+                <th>Producto</th>
+                <th>Precio Actual</th>
+                <th>Precio mañana</th>  
+                <th>Estado</th>      
+            </tr>
+            <tr>
+                <th>Panela</th>
+                <th>5600</th>
+                <th>5200</th>   
+                <th>Bajo</th>
+            </tr>
+            <tr>
+                <th>Arroz</th>
+                <th>2600</th>
+                <th>3000</th>
+                <th>Subio</th>       
+            </tr>
+            </form>
+        </table>  
+    </div>
+</body>
+</html>

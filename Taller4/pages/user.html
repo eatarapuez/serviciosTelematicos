@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/style-sheet.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido <%= user %></title>
+</head>
+<body>
+    <ul>
+        <li><a class="/active" >Bienvenido <%= user %></a></li>
+        <li><a href="/finance">Inicio</a></li>
+        <li><a href="/">Cerrar Sesion</a></li>
+    </ul>
+    <form action="/user" method="post">
+        <div id="borderedondo">
+            <whitetext>Información Financiera</whitetext>
+            <br></br>
+            <p>Ingresos: <input type="text" name="ingresos" value= <%= ingresos %> ></p>
+            <p>Deudas a bancos mensual: <input type="text" name="deuda" value= <%= deuda %> ></p>
+            <button type="submit">Actualizar</button> 
+            <p style="color: rgb(254, 0, 0);">
+                <%= message %>
+            </p>
+        </div>
+    </form>
+</body>
+</html>

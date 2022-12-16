@@ -1,3 +1,77 @@
 body{
-background-color:rgb(129, 113, 173);
+background-color:rgb(152, 138, 191);
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(124, 56, 126);
+}
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 40px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: rgb(120, 122, 125);
+}
+
+#borderedondo{
+    width:350px;
+    padding: 10px 60px;
+    border:3px solid rgb(120, 122, 125);
+    border-radius:22px;
+    color: white;
+}
+
+div whitetext{ 
+    font-size: x-large;
+    color: white;
+    font-weight: bold;
+}
+
+#borderedondoderecha{
+    width:350px;
+    padding: 10px 60px;
+    border:3px solid rgb(120, 122, 125);
+    border-radius:22px;
+    color: white;
+    float: right;
+    margin-top:20%;
+}
+
+#borderedondoizquierda{
+    padding: 10px 60px;
+    border:3px solid rgb(120, 122, 125);
+    border-radius:22px;
+    color: white;
+    background-color: rgb(198, 166, 221);
+}
+
+#borderedondocentrar{
+    width:350px;
+    padding: 10px 60px;
+    border:3px solid rgb(120, 122, 125);
+    border-radius:22px;
+    color: white;
+    float: left;
+    background-color: rgb(213, 123, 123);
+}
+
+#borderedondocentrarWin{
+    width:350px;
+    padding: 10px 60px;
+    border:3px solid rgb(120, 122, 125);
+    border-radius:22px;
+    color: white;
+    float: left;
+    background-color: rgb(149, 191, 172);
 }
